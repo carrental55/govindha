@@ -25,7 +25,7 @@ const Hero = () => {
     const existingScript = document.getElementById('google-maps');
     if (!existingScript) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`;
       script.id = 'google-maps';
       script.async = true;
       script.defer = true;

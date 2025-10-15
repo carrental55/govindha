@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
 
-  const { MONGODB_URI, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID } = process.env;
+  const { MONGODB_URI, TELEGRAM_BOT, TELEGRAM_CHAT } = process.env;
 
   try {
     // Persistent connection
@@ -46,12 +46,12 @@ Price: ${req.body.price}
 Date: ${req.body.date} ${req.body.time}
     `;
 
-    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    if (TELEGRAM_BOT && TELEGRAM_CHAT) {
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
+          chat_id: TELEGRAM_CHAT,
           text: message,
           parse_mode: 'Markdown'
         })
