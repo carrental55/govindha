@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,   // helps catch bugs in development
-    output: 'standalone',    // bundles only necessary files for deployment
+    reactStrictMode: true,
+    
     images: {
-      unoptimized: false,    // keep Next.js image optimization active
+      unoptimized: false,
     },
     experimental: {
-      scrollRestoration: true, // improves SPA navigation performance
+      scrollRestoration: true,
     },
   };
   
