@@ -20,12 +20,10 @@ const Hero = () => {
   const [duration, setDuration] = useState('');
   const [apiLoaded, setApiLoaded] = useState(false);
 
-  // Load Google Maps API once
   useEffect(() => {
-    const existingScript = document.getElementById('google-maps');
-    if (!existingScript) {
+    if (!document.getElementById('google-maps')) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
       script.id = 'google-maps';
       script.async = true;
       script.defer = true;
@@ -36,7 +34,6 @@ const Hero = () => {
     }
   }, []);
 
-  // Setup Autocomplete
   useEffect(() => {
     if (!apiLoaded || !window.google) return;
 
@@ -56,7 +53,6 @@ const Hero = () => {
     });
   }, [apiLoaded]);
 
-  // Handle search
   const handleCalculate = () => {
     if (!pickupPlace.current || !dropPlace.current) {
       alert('Please select both pickup and drop-off locations.');
@@ -81,7 +77,6 @@ const Hero = () => {
             setDistance(distanceText);
             setDuration(durationText);
 
-            // Redirect to carlist page with query params
             router.push(
               `/carlist?pickup=${encodeURIComponent(pickupText)}&drop=${encodeURIComponent(
                 dropText
@@ -107,62 +102,36 @@ const Hero = () => {
       </p>
 
       <div className="grid items-end max-w-4xl grid-cols-1 gap-4 p-4 mx-auto text-black bg-white shadow-lg rounded-xl sm:p-6 sm:grid-cols-5 hero-reveal">
-        {/* Pickup */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <MapPin className="w-5 h-5" /> Pickup Location
           </label>
-          <input
-            ref={pickupRef}
-            placeholder="Enter pickup location"
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+          <input ref={pickupRef} placeholder="Enter pickup location" className="w-full p-2 border border-gray-300 rounded" />
         </div>
 
-        {/* Drop-off */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <MapPin className="w-5 h-5" /> Drop-off Location
           </label>
-          <input
-            ref={dropRef}
-            placeholder="Enter drop-off location"
-            className="w-full p-2 border border-gray-300 rounded"
-          />
+          <input ref={dropRef} placeholder="Enter drop-off location" className="w-full p-2 border border-gray-300 rounded" />
         </div>
 
-        {/* Date */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <Calendar className="w-5 h-5" /> Pickup Date
           </label>
-          <input
-            type="date"
-            className="w-full p-2 border border-gray-300 rounded"
-            value={pickupDate}
-            onChange={(e) => setPickupDate(e.target.value)}
-          />
+          <input type="date" className="w-full p-2 border border-gray-300 rounded" value={pickupDate} onChange={(e) => setPickupDate(e.target.value)} />
         </div>
 
-        {/* Time */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <Clock className="w-5 h-5" /> Pickup Time
           </label>
-          <input
-            type="time"
-            className="w-full p-2 border border-gray-300 rounded"
-            value={pickupTime}
-            onChange={(e) => setPickupTime(e.target.value)}
-          />
+          <input type="time" className="w-full p-2 border border-gray-300 rounded" value={pickupTime} onChange={(e) => setPickupTime(e.target.value)} />
         </div>
 
-        {/* Search Button */}
         <div>
-          <button
-            onClick={handleCalculate}
-            className="flex items-center justify-center w-full gap-2 p-2 text-white bg-blue-600 rounded hover:bg-blue-800"
-          >
+          <button onClick={handleCalculate} className="flex items-center justify-center w-full gap-2 p-2 text-white bg-blue-600 rounded hover:bg-blue-800">
             <Search className="w-5 h-5" />
             Search Cars
           </button>
