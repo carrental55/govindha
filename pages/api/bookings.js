@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 
-// Define Booking schema
 const BookingSchema = new mongoose.Schema({
-  packageName: String,   // ✅ Optional now
+  packageName: String,
   carName: String,
-  seats: String,         // ✅ Optional now
+  seats: String,
   name: String,
   phone: String,
   pickup: String,
@@ -17,7 +16,6 @@ const BookingSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-// Use existing model or create new
 let Booking = mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
 
 export default async function handler(req, res) {
@@ -28,7 +26,6 @@ export default async function handler(req, res) {
   const { MONGODB_URI, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID } = process.env;
 
   try {
-    // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(MONGODB_URI);
     }
@@ -48,12 +45,16 @@ export default async function handler(req, res) {
       time,
     } = req.body;
 
-    // Validate required fields (except packageName/seats)
     if (!name || !phone || !pickup || !drop || !carName) {
       return res.status(400).json({ success: false, error: 'Missing required fields' });
     }
 
-    // Save booking to MongoDB
+    // ✅ Check for duplicate booking
+    const existingBooking = await Booking.findOne({ name, phone, carName, date, time });
+    if (existingBooking) {
+      return res.status(400).json({ success: false, error: 'Duplicate booking detected' });
+    }
+
     const booking = await Booking.create({
       packageName,
       carName,
@@ -69,7 +70,6 @@ export default async function handler(req, res) {
       time,
     });
 
-    // Prepare Telegram message
     const message = `
 🚗 *New Car Booking!*
 Package: ${packageName}
@@ -82,7 +82,6 @@ Price: ₹${price}
 Date: ${date} ${time}
     `;
 
-    // Send Telegram notification if credentials exist
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',

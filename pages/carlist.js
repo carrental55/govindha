@@ -65,6 +65,7 @@ const CarsListPage = () => {
   const [distanceText, setDistanceText] = useState('');
   const [duration, setDuration] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ new
 
   const formRef = useRef(null);
 
@@ -99,18 +100,22 @@ const CarsListPage = () => {
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedCar) return;
+    if (!selectedCar || isSubmitting) return;
+
+    setIsSubmitting(true);
 
     const nameRegex = /^[a-zA-Z ]{2,50}$/;
     const phoneRegex = /^[6-9]\d{9}$/;
 
     if (!nameRegex.test(name)) {
       alert('Please enter a valid name (letters and spaces only).');
+      setIsSubmitting(false);
       return;
     }
 
     if (!phoneRegex.test(phone)) {
       alert('Please enter a valid 10-digit Indian phone number.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -138,17 +143,20 @@ const CarsListPage = () => {
       });
 
       const data = await res.json();
+
       if (res.ok) {
         setBookingPopup(true);
         setShowForm(false);
         setName('');
         setPhone('');
       } else {
-        alert('Booking failed: ' + (data.message || 'Unknown error'));
+        alert('Booking failed: ' + (data.error || 'Unknown error'));
       }
     } catch (error) {
       console.error(error);
       alert('Booking failed. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -339,9 +347,12 @@ const CarsListPage = () => {
 
             <button
               type="submit"
-              className="w-full py-2 mt-4 text-white bg-blue-600 rounded hover:bg-blue-700"
+              disabled={isSubmitting}
+              className={`w-full py-2 mt-4 text-white rounded ${
+                isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+              }`}
             >
-              Confirm Booking
+              {isSubmitting ? 'Booking...' : 'Confirm Booking'}
             </button>
           </form>
         </div>
