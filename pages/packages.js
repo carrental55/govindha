@@ -59,6 +59,7 @@ export default function PackagesPage() {
   const [bookingOpen, setBookingOpen] = useState(null);
   const [formState, setFormState] = useState({});
   const [submitted, setSubmitted] = useState({});
+  const [loading, setLoading] = useState({}); // New: loading state per package
 
   const toggleDetails = (id) => setOpenDetails(openDetails === id ? null : id);
   const toggleBooking = (id) => {
@@ -80,6 +81,8 @@ export default function PackagesPage() {
   };
 
   const handleSubmit = async (pkgId) => {
+    if (loading[pkgId]) return; // prevent double click
+
     const form = formState[pkgId];
     if (!form?.name || !form?.phone || !form?.pickup || !form?.drop) {
       return alert("Please fill out all fields.");
@@ -92,6 +95,8 @@ export default function PackagesPage() {
     const car = pkg.cars.find((c) => c.key === form.selectedCar);
 
     try {
+      setLoading((prev) => ({ ...prev, [pkgId]: true })); // start loading
+
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -120,6 +125,8 @@ export default function PackagesPage() {
     } catch (err) {
       console.error(err);
       alert("Booking failed. Please try again.");
+    } finally {
+      setLoading((prev) => ({ ...prev, [pkgId]: false })); // stop loading
     }
   };
 
@@ -252,7 +259,20 @@ export default function PackagesPage() {
 
                           <div className="flex items-center justify-between mt-5">
                             <div className="text-lg font-bold text-gray-800">Total: ₹{selectedCar.price}</div>
-                            <button onClick={() => handleSubmit(pkg.id)} className="px-5 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700">Confirm Booking</button>
+                            <button
+                              onClick={() => handleSubmit(pkg.id)}
+                              disabled={loading[pkg.id]}
+                              className={`px-5 py-2 text-white rounded-lg ${loading[pkg.id] ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"}`}
+                            >
+                              {loading[pkg.id] ? (
+                                <svg className="w-5 h-5 mx-auto text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                </svg>
+                              ) : (
+                                "Confirm Booking"
+                              )}
+                            </button>
                           </div>
                         </>
                       )}
