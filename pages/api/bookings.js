@@ -2,14 +2,16 @@ import mongoose from 'mongoose';
 
 // Define Booking schema
 const BookingSchema = new mongoose.Schema({
+  packageName: String,   // ✅ Optional now
   carName: String,
+  seats: String,         // ✅ Optional now
   name: String,
   phone: String,
   pickup: String,
   drop: String,
   distance: String,
   duration: String,
-  price: String,
+  price: Number,
   date: String,
   time: String,
   createdAt: { type: Date, default: Date.now },
@@ -26,21 +28,36 @@ export default async function handler(req, res) {
   const { MONGODB_URI, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID } = process.env;
 
   try {
-    // Persistent connection
+    // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(MONGODB_URI);
     }
 
-    const { carName, name, phone, pickup, drop, distance, duration, price, date, time } = req.body;
+    const {
+      packageName = "N/A",
+      carName,
+      seats = "N/A",
+      name,
+      phone,
+      pickup,
+      drop,
+      distance = "",
+      duration = "",
+      price,
+      date,
+      time,
+    } = req.body;
 
-    // Validate required fields
-    if (!name || !phone || !pickup || !drop) {
+    // Validate required fields (except packageName/seats)
+    if (!name || !phone || !pickup || !drop || !carName) {
       return res.status(400).json({ success: false, error: 'Missing required fields' });
     }
 
     // Save booking to MongoDB
     const booking = await Booking.create({
+      packageName,
       carName,
+      seats,
       name,
       phone,
       pickup,
@@ -55,18 +72,17 @@ export default async function handler(req, res) {
     // Prepare Telegram message
     const message = `
 🚗 *New Car Booking!*
-Car: ${carName}
+Package: ${packageName}
+Car: ${carName} (${seats})
 Customer: ${name}
 Phone: ${phone}
 Pickup: ${pickup}
 Drop: ${drop}
-Distance: ${distance}
-Duration: ${duration}
-Price: ${price}
+Price: ₹${price}
 Date: ${date} ${time}
     `;
 
-    // Send Telegram notification
+    // Send Telegram notification if credentials exist
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',

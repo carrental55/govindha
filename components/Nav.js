@@ -1,9 +1,9 @@
-'use client'; // Needed for useState
+'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@mui/material';
-import { Car, Menu, X, LogIn, LogOut, Shield } from 'lucide-react';
+import { Car, Menu, X, Shield, LogIn, LogOut } from 'lucide-react';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,15 +30,13 @@ const Nav = () => {
             <span className="text-xl font-bold">carrental</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="items-center hidden space-x-8 md:flex">
-            <Link href="/" className="text-gray-700 transition-colors hover:text-blue-700">Home</Link>
-            <Link href="/cars_list" className="text-gray-700 transition-colors hover:text-blue-700">Cars</Link>
-            <Link href="#" className="text-gray-700 transition-colors hover:text-blue-700">About</Link>
-            <Link href="/contact" className="text-gray-700 transition-colors hover:text-blue-700">Contact</Link>
+          {/* Navigation Links (Home & Packages always visible) */}
+          <div className="flex items-center space-x-8">
+            <Link href="/" className="text-gray-700 hover:text-blue-700">Home</Link>
+            <Link href="/packages" className="text-gray-700 hover:text-blue-700">Packages</Link>
 
             {isAdmin && (
-              <Link href="/adminpage" className="flex items-center gap-2 text-gray-700 hover:text-blue-700">
+              <Link href="/adminpage" className="items-center hidden gap-2 text-gray-700 md:flex hover:text-blue-700">
                 <Shield className="w-4 h-4" /> <span>Admin</span>
               </Link>
             )}
@@ -47,56 +45,54 @@ const Nav = () => {
           {/* Desktop Login/Logout */}
           <div className="items-center hidden space-x-4 md:flex">
             {!isAdmin ? (
-              <Link href="/login" className="flex items-center gap-2 px-2 py-1 transition duration-300 rounded-sm hover:bg-gray-200">
-                <LogIn className="w-4 h-4" /> <span>Login</span>
+              <Link href="/login">
+                <Button variant="ghost" size="small" className="flex items-center gap-2">
+                  <LogIn className="w-4 h-4" /> AdminLogin
+                </Button>
               </Link>
             ) : (
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-2 py-1 text-red-600 transition duration-300 rounded-sm hover:bg-gray-200"
-              >
-                <LogOut className="w-4 h-4" /> <span>Logout</span>
-              </button>
+              <Button variant="ghost" size="small" color="error" onClick={handleLogout} className="flex items-center gap-2">
+                <LogOut className="w-4 h-4" /> Logout
+              </Button>
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="small" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {/* Mobile Hamburger Menu (AdminLogin/Logout only) */}
+          <div className="flex items-center md:hidden">
+            <Button
+              variant="ghost"
+              size="small"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex items-center"
+            >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu (AdminLogin/Logout only) */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t sm:px-3">
-              <Link href="/" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-700">Home</Link>
-              <Link href="/cars_list" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-700">Cars</Link>
-              <Link href="#" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-700">About</Link>
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-700">Contact</Link>
-
-              {isAdmin && (
-                <Link href="/adminpage" onClick={() => setIsMenuOpen(false)} className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-700">
-                  <Shield className="inline w-4 h-4 mr-1" /> Admin
-                </Link>
-              )}
-            </div>
-
-            <div className="flex items-center px-3 pb-5 space-x-4">
-              {!isAdmin ? (
-                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="ghost" size="small">
-                    <LogIn className="w-4 h-4 mr-2" /> Login
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="ghost" size="small" color="error" onClick={handleLogout}>
-                  <LogOut className="w-4 h-4 mr-2" /> Logout
+          <div className="px-4 pb-4 bg-white border-t md:hidden">
+            {!isAdmin ? (
+              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="ghost" size="small" className="flex items-center justify-start w-full gap-2">
+                  <LogIn className="w-4 h-4" /> AdminLogin
                 </Button>
-              )}
-            </div>
+              </Link>
+            ) : (
+              <Button
+                variant="ghost"
+                size="small"
+                color="error"
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-start w-full gap-2"
+              >
+                <LogOut className="w-4 h-4" /> Logout
+              </Button>
+            )}
           </div>
         )}
       </div>

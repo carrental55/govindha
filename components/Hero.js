@@ -20,6 +20,7 @@ const Hero = () => {
   const [duration, setDuration] = useState('');
   const [apiLoaded, setApiLoaded] = useState(false);
 
+  // Load Google Maps script
   useEffect(() => {
     if (!document.getElementById('google-maps')) {
       const script = document.createElement('script');
@@ -34,11 +35,17 @@ const Hero = () => {
     }
   }, []);
 
+  // Initialize Google Places Autocomplete restricted to India
   useEffect(() => {
     if (!apiLoaded || !window.google) return;
 
-    const pickupAutocomplete = new window.google.maps.places.Autocomplete(pickupRef.current);
-    const dropAutocomplete = new window.google.maps.places.Autocomplete(dropRef.current);
+    const options = {
+      fields: ['formatted_address', 'geometry', 'name'],
+      componentRestrictions: { country: 'IN' }, // Restrict to India
+    };
+
+    const pickupAutocomplete = new window.google.maps.places.Autocomplete(pickupRef.current, options);
+    const dropAutocomplete = new window.google.maps.places.Autocomplete(dropRef.current, options);
 
     pickupAutocomplete.addListener('place_changed', () => {
       const place = pickupAutocomplete.getPlace();
@@ -102,36 +109,64 @@ const Hero = () => {
       </p>
 
       <div className="grid items-end max-w-4xl grid-cols-1 gap-4 p-4 mx-auto text-black bg-white shadow-lg rounded-xl sm:p-6 sm:grid-cols-5 hero-reveal">
-        <div>
+        {/* Pickup Location */}
+        <div className="relative z-50">
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <MapPin className="w-5 h-5" /> Pickup Location
           </label>
-          <input ref={pickupRef} placeholder="Enter pickup location" className="w-full p-2 border border-gray-300 rounded" />
+          <input
+            ref={pickupRef}
+            placeholder="Enter pickup location"
+            autoComplete="off"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
         </div>
 
-        <div>
+        {/* Drop-off Location */}
+        <div className="relative z-50">
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <MapPin className="w-5 h-5" /> Drop-off Location
           </label>
-          <input ref={dropRef} placeholder="Enter drop-off location" className="w-full p-2 border border-gray-300 rounded" />
+          <input
+            ref={dropRef}
+            placeholder="Enter drop-off location"
+            autoComplete="off"
+            className="w-full p-2 border border-gray-300 rounded"
+          />
         </div>
 
+        {/* Pickup Date */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <Calendar className="w-5 h-5" /> Pickup Date
           </label>
-          <input type="date" className="w-full p-2 border border-gray-300 rounded" value={pickupDate} onChange={(e) => setPickupDate(e.target.value)} />
+          <input
+            type="date"
+            className="w-full p-2 border border-gray-300 rounded"
+            value={pickupDate}
+            onChange={(e) => setPickupDate(e.target.value)}
+          />
         </div>
 
+        {/* Pickup Time */}
         <div>
           <label className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
             <Clock className="w-5 h-5" /> Pickup Time
           </label>
-          <input type="time" className="w-full p-2 border border-gray-300 rounded" value={pickupTime} onChange={(e) => setPickupTime(e.target.value)} />
+          <input
+            type="time"
+            className="w-full p-2 border border-gray-300 rounded"
+            value={pickupTime}
+            onChange={(e) => setPickupTime(e.target.value)}
+          />
         </div>
 
+        {/* Search Button */}
         <div>
-          <button onClick={handleCalculate} className="flex items-center justify-center w-full gap-2 p-2 text-white bg-blue-600 rounded hover:bg-blue-800">
+          <button
+            onClick={handleCalculate}
+            className="flex items-center justify-center w-full gap-2 p-2 text-white bg-blue-600 rounded hover:bg-blue-800"
+          >
             <Search className="w-5 h-5" />
             Search Cars
           </button>

@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
 const BookingSchema = new mongoose.Schema({
+  packageName: { type: String, default: "" }, // Added packageName
   carName: String,
+  seats: { type: String, default: "" },       // Added seats
   name: String,
   phone: String,
   pickup: String,
@@ -29,7 +31,25 @@ export default async function handler(req, res) {
     }
 
     const bookings = await Booking.find({}).sort({ createdAt: -1 });
-    res.status(200).json({ success: true, bookings });
+
+    // Ensure packageName and seats exist for all bookings
+    const updatedBookings = bookings.map(b => ({
+      packageName: b.packageName || "",
+      seats: b.seats || "",
+      carName: b.carName,
+      name: b.name,
+      phone: b.phone,
+      pickup: b.pickup,
+      drop: b.drop,
+      distance: b.distance,
+      duration: b.duration,
+      price: b.price,
+      date: b.date,
+      time: b.time,
+      createdAt: b.createdAt
+    }));
+
+    res.status(200).json({ success: true, bookings: updatedBookings });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, error: error.message });

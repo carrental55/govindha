@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Car, CheckCircle, Clock, XCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export default function AdminBookingsPage() {
   const router = useRouter();
@@ -10,17 +10,12 @@ export default function AdminBookingsPage() {
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
 
-  // Protect admin page
   useEffect(() => {
     const token = localStorage.getItem("admin_token");
-    if (!token || token !== "verified") {
-      router.push("/login");
-    } else {
-      setAuthorized(true);
-    }
+    if (!token || token !== "verified") router.push("/login");
+    else setAuthorized(true);
   }, [router]);
 
-  // Fetch bookings only if authorized
   useEffect(() => {
     if (!authorized) return;
 
@@ -38,41 +33,11 @@ export default function AdminBookingsPage() {
     fetchBookings();
   }, [authorized]);
 
-  const getStatusBadge = (status) => {
-    const styles = {
-      confirmed: "bg-green-100 text-green-800",
-      pending: "bg-yellow-100 text-yellow-800",
-      rejected: "bg-red-100 text-red-800",
-    };
-
-    const icons = {
-      confirmed: <CheckCircle className="w-4 h-4" />,
-      pending: <Clock className="w-4 h-4" />,
-      rejected: <XCircle className="w-4 h-4" />,
-    };
-
-    return (
-      <span
-        className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${
-          styles[status] || styles.pending
-        }`}
-      >
-        {icons[status] || icons.pending}{" "}
-        <span className="capitalize">{status || "pending"}</span>
-      </span>
-    );
-  };
-
-  const updateStatus = (index, status) => {
-    const updated = [...bookings];
-    updated[index].status = status;
-    setBookings(updated);
-  };
-
   if (!authorized || loading)
     return (
-      <div className="flex items-center justify-center h-screen text-lg text-gray-600">
-        Loading bookings...
+      <div className="flex items-center justify-center h-screen space-x-2 text-lg text-gray-600">
+        <Loader2 className="animate-spin" />
+        <span>Loading bookings...</span>
       </div>
     );
 
@@ -83,98 +48,65 @@ export default function AdminBookingsPage() {
       </div>
     );
 
-  const stats = {
-    total: bookings.length,
-    confirmed: bookings.filter((b) => b.status === "confirmed").length,
-    rejected: bookings.filter((b) => b.status === "rejected").length,
-    pending: bookings.filter((b) => b.status === "pending").length,
-  };
+  const renderField = (value) => (
+    value ? (
+      <span className="font-semibold text-red-600">{value}</span>
+    ) : (
+      <span className="italic text-gray-400">Not set</span>
+    )
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="container px-4 py-8 mx-auto max-w-7xl">
-        <h1 className="mb-2 text-4xl font-bold text-slate-900">
-          Booking Management
-        </h1>
-        <p className="mb-8 text-slate-600">
-          Manage and track all car rental bookings
-        </p>
+    <div className="min-h-screen py-8 bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="container px-4 mx-auto max-w-7xl">
+        <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-slate-900">Booking Management</h1>
+        <p className="mb-8 text-lg text-slate-600">View all car rental bookings</p>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-3 lg:grid-cols-3">
-          <div className="flex items-center justify-between p-5 bg-white shadow-md rounded-xl">
-            <div>
-              <h3 className="text-sm font-medium text-slate-600">Total Bookings</h3>
-              <div className="mt-2 text-3xl font-bold text-slate-900">{stats.total}</div>
-            </div>
-            <Car className="w-5 h-5 text-blue-600" />
-          </div>
-          <div className="flex items-center justify-between p-5 bg-white shadow-md rounded-xl">
-            <div>
-              <h3 className="text-sm font-medium text-slate-600">Confirmed</h3>
-              <div className="mt-2 text-3xl font-bold text-slate-900">{stats.confirmed}</div>
-            </div>
-            <CheckCircle className="w-5 h-5 text-green-600" />
-          </div>
-          <div className="flex items-center justify-between p-5 bg-white shadow-md rounded-xl">
-            <div>
-              <h3 className="text-sm font-medium text-slate-600">Rejected</h3>
-              <div className="mt-2 text-3xl font-bold text-slate-900">{stats.rejected}</div>
-            </div>
-            <XCircle className="w-5 h-5 text-red-600" />
-          </div>
-        </div>
-
-        {/* Bookings Table */}
-        <div className="overflow-hidden bg-white shadow-lg rounded-xl">
-          <div className="p-5 border-b">
+        <div className="overflow-hidden bg-white shadow-lg rounded-2xl">
+          <div className="p-6 border-b">
             <h2 className="text-2xl font-bold text-slate-900">All Bookings</h2>
           </div>
+
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm text-left text-slate-700">
+            <table className="min-w-full text-sm text-left divide-y text-slate-700 divide-slate-200">
               <thead className="font-semibold bg-slate-50 text-slate-900">
                 <tr>
+                  <th className="px-4 py-3">Package</th>
                   <th className="px-4 py-3">Customer</th>
                   <th className="px-4 py-3">Vehicle</th>
-                  <th className="px-4 py-3">Rental Period</th>
-                  <th className="px-4 py-3">Location</th>
+                  <th className="px-4 py-3">Seats</th>
+                  <th className="px-4 py-3">Pickup → Drop</th>
                   <th className="px-4 py-3">Distance</th>
-                  <th className="px-4 py-3">Amount</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3">Action</th>
+                  <th className="px-4 py-3">Date & Time</th>
+                  <th className="px-4 py-3">Price</th>
                 </tr>
               </thead>
-              <tbody>
+
+              <tbody className="divide-y divide-slate-200">
                 {bookings.map((b, idx) => (
-                  <tr key={idx} className="transition border-b hover:bg-slate-50">
+                  <tr key={idx} className="transition hover:bg-slate-50">
+                    <td className="px-4 py-3 text-lg">{renderField(b.packageName)}</td>
+
                     <td className="px-4 py-3">
-                      <div className="font-medium text-slate-900">{b.name}</div>
+                      <div className="text-lg font-medium text-slate-900">{b.name}</div>
                       <div className="text-xs text-slate-400">{b.phone}</div>
                     </td>
-                    <td className="px-4 py-3">{b.carName}</td>
-                    <td className="px-4 py-3">{b.date} {b.time}</td>
-                    <td className="px-4 py-3">{b.pickup} → {b.drop}</td>
-                    <td className="px-4 py-3">{b.distance}</td>
-                    <td className="px-4 py-3 font-semibold text-slate-900">₹{b.price}</td>
-                    <td className="px-4 py-3">{getStatusBadge(b.status || "pending")}</td>
-                    <td className="flex gap-2 px-4 py-3">
-                      {b.status === "pending" && (
-                        <>
-                          <button
-                            className="px-2 py-1 text-white bg-green-600 rounded"
-                            onClick={() => updateStatus(idx, "confirmed")}
-                          >
-                            Accept
-                          </button>
-                          <button
-                            className="px-2 py-1 text-white bg-red-600 rounded"
-                            onClick={() => updateStatus(idx, "rejected")}
-                          >
-                            Reject
-                          </button>
-                        </>
-                      )}
+
+                    <td className="px-4 py-3 text-lg">{b.carName || <span className="italic text-gray-400">Not set</span>}</td>
+
+                    <td className="px-4 py-3 text-lg">{renderField(b.seats)}</td>
+
+                    <td className="px-4 py-3 text-lg">
+                      {b.pickup || <span className="italic text-gray-400">Not set</span>} 
+                      → 
+                      {b.drop || <span className="italic text-gray-400">Not set</span>}
                     </td>
+
+                    <td className="px-4 py-3 text-lg">{b.distance || <span className="italic text-gray-400">Not set</span>}</td>
+
+                    <td className="px-4 py-3 text-lg">{b.date} {b.time}</td>
+
+                    <td className="px-4 py-3 text-lg font-semibold text-slate-900">₹{b.price || 0}</td>
                   </tr>
                 ))}
               </tbody>

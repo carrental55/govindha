@@ -1,79 +1,48 @@
 'use client';
 
 import Link from 'next/link';
-import { Car, Facebook, Twitter, Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import { Car, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="px-4 py-16 text-gray-300 bg-gray-900 sm:px-6 lg:px-20">
-      <div className="grid grid-cols-1 gap-10 mx-auto max-w-7xl md:grid-cols-4">
-        {/* Company Info */}
-        <div>
+      <div className="flex flex-col gap-8 mx-auto max-w-7xl">
+        {/* Logo and Description */}
+        <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center space-x-2">
             <Car className="w-8 h-8 text-blue-500" />
             <span className="text-xl font-bold">carrentals</span>
           </Link>
-          <p className="my-4 leading-relaxed">
+          <p className="max-w-md leading-relaxed">
             Your trusted partner for premium car rentals. Experience the freedom of the road with our quality vehicles and exceptional service.
           </p>
-          <div className="flex gap-4 mt-2">
-            <Facebook className="cursor-pointer hover:text-white" />
-            <Twitter className="cursor-pointer hover:text-white" />
-            <Instagram className="cursor-pointer hover:text-white" />
-          </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="mb-4 font-semibold text-white">Quick Links</h4>
-          <ul className="space-y-2">
-            <li><Link href="#" className="hover:underline">Home</Link></li>
-            <li><Link href="#" className="hover:underline">Our Cars</Link></li>
-            <li><Link href="#" className="hover:underline">About Us</Link></li>
-            <li><Link href="#" className="hover:underline">Contact</Link></li>
-            <li><Link href="#" className="hover:underline">Terms & Conditions</Link></li>
-          </ul>
-        </div>
-
-        {/* Services */}
-        <div>
-          <h4 className="mb-4 font-semibold text-white">Services</h4>
-          <ul className="space-y-2">
-            <li><Link href="#" className="hover:underline">Economy Cars</Link></li>
-            <li><Link href="#" className="hover:underline">Luxury Vehicles</Link></li>
-            <li><Link href="#" className="hover:underline">SUVs & Trucks</Link></li>
-            <li><Link href="#" className="hover:underline">Electric Cars</Link></li>
-            <li><Link href="#" className="hover:underline">Long-term Rentals</Link></li>
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h4 className="mb-4 font-semibold text-white">Contact Us</h4>
-          <ul className="space-y-3">
-            <li className="flex items-center gap-2">
-              <Phone className="w-5 h-5 text-blue-400" /> +1 (555) 123-4567
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail className="w-5 h-5 text-blue-400" /> info@carrental.com
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-400" /> 123 Main St, City, State 12345
-            </li>
-          </ul>
+        {/* Contact Information */}
+        <div className="flex flex-col gap-2 text-gray-300">
+          <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white">
+            <Phone className="w-5 h-5 text-blue-400" /> +91 98765 43210
+          </a>
+          <a href="mailto:info@carrental.com" className="flex items-center gap-2 hover:text-white">
+            <Mail className="w-5 h-5 text-blue-400" /> info@carrental.com
+          </a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=123+MG+Road+Bengaluru+India"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-white"
+          >
+            <MapPin className="w-5 h-5 text-blue-400" /> 123, MG Road, Bengaluru, India
+          </a>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="flex flex-col items-center justify-between pt-6 mt-10 text-sm text-gray-500 border-t border-gray-700 sm:flex-row">
-        <p>&copy; {new Date().getFullYear()} carrentals. All rights reserved.</p>
-        <div className="flex gap-4 mt-4 sm:mt-0">
-          <Link href="#" className="hover:underline">Privacy Policy</Link>
-          <Link href="#" className="hover:underline">Terms of Service</Link>
-        </div>
+      <div className="pt-6 mt-10 text-sm text-gray-500 border-t border-gray-700">
+        &copy; {new Date().getFullYear()} carrentals. All rights reserved.
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

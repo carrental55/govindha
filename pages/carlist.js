@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Car, MapPin, Users, Cog, Fuel, Star, X } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const cars = [
     seats: 5,
     transmission: 'Automatic',
     fuel: 'Electric',
-    price: 89, // price per km
+    price: 89,
     rating: 4.8,
     badges: ['Autopilot', 'Premium Audio', '+2 more'],
     type: 'Electric',
@@ -66,7 +66,8 @@ const CarsListPage = () => {
   const [duration, setDuration] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // ✅ Populate fields from URL params and apply ScrollReveal animations
+  const formRef = useRef(null);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -77,7 +78,6 @@ const CarsListPage = () => {
       setDistanceText(params.get('distance') || '');
       setDuration(params.get('duration') || '');
 
-      // Scroll animation
       const ScrollReveal = require('scrollreveal').default;
       const sr = ScrollReveal();
       sr.reveal('.head-reveal', { distance: '0px', duration: 1500, scale: 0.9 });
@@ -85,20 +85,34 @@ const CarsListPage = () => {
     }
   }, []);
 
-  // ✅ Handle "Book Now" click
   const handleBookNow = (car) => {
     setSelectedCar(car);
     setShowForm(true);
-    // Calculate total price immediately if distance exists
+
     const distanceInKm = parseFloat(distanceText.replace(/[^\d.]/g, '')) || 0;
     setTotalPrice((distanceInKm * car.price).toFixed(2));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
-  // ✅ Handle Booking Form submission
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if (!selectedCar) return;
+
+    const nameRegex = /^[a-zA-Z ]{2,50}$/;
+    const phoneRegex = /^[6-9]\d{9}$/;
+
+    if (!nameRegex.test(name)) {
+      alert('Please enter a valid name (letters and spaces only).');
+      return;
+    }
+
+    if (!phoneRegex.test(phone)) {
+      alert('Please enter a valid 10-digit Indian phone number.');
+      return;
+    }
 
     const distanceInKm = parseFloat(distanceText.replace(/[^\d.]/g, '')) || 0;
     const calculatedPrice = (distanceInKm * selectedCar.price).toFixed(2);
@@ -140,7 +154,7 @@ const CarsListPage = () => {
 
   return (
     <section className="px-4 py-20 bg-gray-50 sm:px-6 lg:px-20">
-      {/* ✅ Booking Popup */}
+      {/* Booking Popup */}
       {bookingPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="relative w-full max-w-md p-8 text-center bg-white shadow-lg rounded-xl">
@@ -156,7 +170,7 @@ const CarsListPage = () => {
         </div>
       )}
 
-      {/* ✅ Car Listing */}
+      {/* Car Listing */}
       <div className="mx-auto mb-16 text-center max-w-7xl head-reveal">
         <h1 className="flex items-center justify-center gap-3 text-4xl font-extrabold text-gray-800 sm:text-5xl">
           <Car className="w-12 h-12 text-blue-500" /> Our Cars
@@ -237,9 +251,9 @@ const CarsListPage = () => {
         ))}
       </div>
 
-      {/* ✅ Booking Form */}
+      {/* Booking Form */}
       {showForm && selectedCar && (
-        <div className="max-w-lg p-6 mx-auto mt-12 bg-white shadow-md rounded-xl">
+        <div ref={formRef} className="max-w-lg p-6 mx-auto mt-12 bg-white shadow-md rounded-xl">
           <h2 className="mb-4 text-2xl font-semibold text-center text-blue-700">
             Booking Details
           </h2>
@@ -252,6 +266,8 @@ const CarsListPage = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded"
+                pattern="^[a-zA-Z ]{2,50}$"
+                title="Name should be letters and spaces only (2-50 characters)"
               />
             </div>
 
@@ -263,6 +279,8 @@ const CarsListPage = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded"
+                pattern="^[6-9]\d{9}$"
+                title="Enter valid 10-digit Indian phone number"
               />
             </div>
 
