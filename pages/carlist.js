@@ -7,48 +7,128 @@ import { Car, MapPin, Users, Cog, Fuel, Star, X } from 'lucide-react';
 const cars = [
   {
     id: 1,
-    name: 'Tesla Model 3',
-    year: 2023,
-    location: 'San Francisco',
-    seats: 5,
-    transmission: 'Automatic',
-    fuel: 'Electric',
-    price: 89,
+    name: 'SWIFT DZIRE - DXI BLUE COLOUR',
+    location: 'Tirupati',
+    seats: '4+1',
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
     rating: 4.8,
-    badges: ['Autopilot', 'Premium Audio', '+2 more'],
-    type: 'Electric',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
     status: 'Available',
-    image: '/assets/tesla.jpg',
+    image: '/assets/dzireblue.jpg', // path relative to public folder
   },
   {
     id: 2,
-    name: 'BMW X5',
-    year: 2023,
-    location: 'New York',
-    seats: 7,
-    transmission: 'Automatic',
-    fuel: 'Gasoline',
-    price: 149,
-    rating: 4.7,
-    badges: ['Leather Seats', 'Navigation', '+2 more'],
-    type: 'Luxury SUV',
+    name: 'TOYOTA ETIOS - SILVER COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:2000,
+    rating: '4.7',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+ 
     status: 'Available',
-    image: '/assets/bmw.jpg',
+    image: '/assets/etiossilver.jpg',
   },
   {
     id: 3,
-    name: 'Audi A4',
-    year: 2023,
-    location: 'Los Angeles',
-    seats: 5,
-    transmission: 'Automatic',
-    fuel: 'Gasoline',
-    price: 79,
-    rating: 4.6,
-    badges: ['Virtual Cockpit', 'Heated Seats', '+2 more'],
-    type: 'Sedan',
+    name: 'INNOVA CRYSTA Z - GRANITE RED',
+   
+    location: 'Tirupati',
+    seats: '6+1',
+   
+    fuel: 'Diesel',
+    price: 25,
+    Day:3500,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
     status: 'Available',
-    image: '/assets/audi.jpg',
+    image: '/assets/innovared.jpg',
+  },
+  {
+    id: 4,
+    name: 'SWIFT DZIRE ZXI+ - RED COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+   
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+  
+    status: 'Available',
+    image: '/assets/swiftdzirered.jpg',
+  },
+  {
+    id: 5,
+    name: 'SWIFT DZIRE ZXI+ - WHITE COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+   
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+  
+    status: 'Available',
+    image: '/assets/swiftdzirewhite.jpg',
+  },
+  {
+    id: 6,
+    name: 'MARUTI SUZUKI XL6',
+   
+    location: 'Tirupati',
+    seats: '5+1',
+   
+    fuel: 'Petrol',
+    price: 20,
+    Day:3000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+   
+    status: 'Available',
+    image: '/assets/xl6.jpg',
+  },
+  {
+    id: 7,
+    name: 'SWIFT DZIRE - VXI',
+    
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:2000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/swiftdzirered.jpg',
+  },
+  {
+    id: 8,
+    name: 'SWIFT DZIRE NEW - VXI',
+    
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/swiftdzirewhite.jpg',
   },
 ];
 
@@ -212,8 +292,6 @@ const CarsListPage = () => {
                 </div>
               </div>
 
-              <p className="mb-3 text-sm text-gray-500">{car.year}</p>
-
               <div className="flex items-center gap-3 mb-3 text-gray-600">
                 <MapPin className="w-4 h-4 text-blue-500" />
                 <span>{car.location}</span>
@@ -223,9 +301,7 @@ const CarsListPage = () => {
                 <span className="flex items-center gap-1">
                   <Users className="w-4 h-4 text-blue-500" /> {car.seats} seats
                 </span>
-                <span className="flex items-center gap-1">
-                  <Cog className="w-4 h-4 text-blue-500" /> {car.transmission}
-                </span>
+            
                 <span className="flex items-center gap-1">
                   <Fuel className="w-4 h-4 text-blue-500" /> {car.fuel}
                 </span>
@@ -247,6 +323,7 @@ const CarsListPage = () => {
                   ₹{car.price}
                   <span className="text-sm font-normal text-gray-500">/km</span>
                 </p>
+               
                 <button
                   onClick={() => handleBookNow(car)}
                   className="px-4 py-2 font-medium text-white transition duration-300 bg-green-600 rounded-lg hover:bg-green-700"

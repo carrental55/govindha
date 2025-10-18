@@ -7,49 +7,131 @@ import { Car, MapPin, Users, Cog, Fuel, Star, ArrowRight } from 'lucide-react';
 const cars = [
   {
     id: 1,
-    name: 'Tesla Model 3',
-    year: 2023,
-    location: 'San Francisco',
-    seats: 5,
-    transmission: 'Automatic',
-    fuel: 'Electric',
-    price: 89,
+    name: 'SWIFT DZIRE - DXI BLUE COLOUR',
+    location: 'Tirupati',
+    seats: '4+1',
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
     rating: 4.8,
-    badges: ['Autopilot', 'Premium Audio', '+2 more'],
-    type: 'Electric',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
     status: 'Available',
-    image: '/assets/tesla.jpg', // path relative to public folder
+    image: '/assets/dzireblue.jpg', // path relative to public folder
   },
   {
     id: 2,
-    name: 'BMW X5',
-    year: 2023,
-    location: 'New York',
-    seats: 7,
-    transmission: 'Automatic',
-    fuel: 'Gasoline',
-    price: 149,
-    rating: 4.7,
-    badges: ['Leather Seats', 'Navigation', '+2 more'],
-    type: 'Luxury SUV',
+    name: 'TOYOTA ETIOS - SILVER COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:2000,
+    rating: '4.7',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+ 
     status: 'Available',
-    image: '/assets/bmw.jpg',
+    image: '/assets/etiossilver.jpg',
   },
   {
     id: 3,
-    name: 'Audi A4',
-    year: 2023,
-    location: 'Los Angeles',
-    seats: 5,
-    transmission: 'Automatic',
-    fuel: 'Gasoline',
-    price: 79,
-    rating: 4.6,
-    badges: ['Virtual Cockpit', 'Heated Seats', '+2 more'],
-    type: 'Sedan',
+    name: 'INNOVA CRYSTA Z - GRANITE RED',
+   
+    location: 'Tirupati',
+    seats: '6+1',
+   
+    fuel: 'Diesel',
+    price: 25,
+    Day:3500,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
     status: 'Available',
-    image: '/assets/audi.jpg',
+    image: '/assets/innovared.jpg',
   },
+  {
+    id: 4,
+    name: 'SWIFT DZIRE ZXI+ - RED COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+   
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+  
+    status: 'Available',
+    image: '/assets/swiftdzirered.jpg',
+  },
+  {
+    id: 5,
+    name: 'SWIFT DZIRE ZXI+ - WHITE COLOUR',
+   
+    location: 'Tirupati',
+    seats: '4+1',
+   
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: '4.6',
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+  
+    status: 'Available',
+    image: '/assets/swiftdzirewhite.jpg',
+  },
+  {
+    id: 6,
+    name: 'MARUTI SUZUKI XL6',
+   
+    location: 'Tirupati',
+    seats: '5+1',
+   
+    fuel: 'Petrol',
+    price: 20,
+    Day:3000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+   
+    status: 'Available',
+    image: '/assets/xl6.jpg',
+  },
+  {
+    id: 7,
+    name: 'SWIFT DZIRE - VXI',
+    
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:2000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/swiftdzirered.jpg',
+  },
+  {
+    id: 8,
+    name: 'SWIFT DZIRE NEW - VXI',
+    
+    location: 'Tirupati',
+    seats: '4+1',
+    
+    fuel: 'Petrol',
+    price: 15,
+    Day:2000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/swiftdzirewhite.jpg',
+  },
+  
+  
   // add remaining cars similarly
 ];
 
@@ -83,9 +165,9 @@ const FeaturedCars = () => {
       <div className="mx-auto mb-12 text-center max-w-7xl head-reveal">
         <h2 className="flex items-center justify-center gap-2 mb-2 text-3xl font-bold sm:text-4xl">
           <span className="text-blue-500"><Car className='w-12 h-12' /></span>
-          <span className='text-gray-800'>Featured Cars</span>
+          <span className='text-gray-800'>Available Cars</span>
         </h2>
-        <p className="text-lg text-gray-600">Discover our handpicked selection of premium vehicles, perfect for any journey</p>
+        <p className="text-lg text-gray-600">Discover our handpicked selection of Affordable vehicles, perfect for any journey</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +181,7 @@ const FeaturedCars = () => {
                 height={300} 
                 className="object-cover w-full h-48 rounded-md sm:h-56 md:h-60" 
               />
-              <span className="absolute px-2 py-1 text-xs font-semibold bg-white rounded-full shadow top-2 left-2">{car.type}</span>
+              
               <span className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded-full top-2 right-2">{car.status}</span>
             </div>
 
@@ -108,13 +190,13 @@ const FeaturedCars = () => {
                 <h3 className="text-lg font-semibold">{car.name}</h3>
                 <div className="flex items-center gap-1 text-sm text-yellow-500"><Star className='w-5 h-5' />{car.rating}</div>
               </div>
-              <p className="text-sm text-gray-500">{car.year}</p>
+             
               <div className="flex items-center gap-1 my-4 text-sm text-gray-500">
                 <MapPin className='w-4 h-4' /><span>{car.location}</span>
               </div>
               <div className="flex flex-col gap-2 mt-2 text-sm text-gray-600 sm:items-center sm:flex-row sm:gap-10">
                 <span className='inline-flex items-center gap-1'><Users className='w-4 h-4 text-blue-500' /> {car.seats} seats</span>
-                <span className='inline-flex items-center gap-1'><Cog className='w-4 h-4 text-blue-500' /> {car.transmission}</span>
+               
                 <span className='inline-flex items-center gap-1'><Fuel className='w-4 h-4 text-blue-500' /> {car.fuel}</span>
               </div>
               <div className="flex flex-wrap gap-2 mt-3">
@@ -124,6 +206,9 @@ const FeaturedCars = () => {
               </div>
               <div className="mt-4">
                 <p className="text-lg font-bold text-blue-500"> ₹{car.price}<span className="text-sm font-normal text-gray-500">/km</span></p>
+              </div>
+              <div className="mt-4">
+                <p className="text-lg font-bold text-blue-500"> ₹{car.Day}<span className="text-sm font-normal text-gray-500">/PER DAY</span></p>
               </div>
               
             </div>

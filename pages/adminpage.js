@@ -85,7 +85,10 @@ export default function AdminBookingsPage() {
               <tbody className="divide-y divide-slate-200">
                 {bookings.map((b, idx) => (
                   <tr key={idx} className="transition hover:bg-slate-50">
-                    <td className="px-4 py-3 text-lg">{renderField(b.packageName)}</td>
+                    {/* Highlight Day Package */}
+                    <td className={`px-4 py-3 text-lg ${b.packageName === "Day Package" ? "text-blue-600 font-bold" : ""}`}>
+                      {b.packageName || <span className="italic text-gray-400">Not set</span>}
+                    </td>
 
                     <td className="px-4 py-3">
                       <div className="text-lg font-medium text-slate-900">{b.name}</div>
@@ -94,12 +97,10 @@ export default function AdminBookingsPage() {
 
                     <td className="px-4 py-3 text-lg">{b.carName || <span className="italic text-gray-400">Not set</span>}</td>
 
-                    <td className="px-4 py-3 text-lg">{renderField(b.seats)}</td>
+                    <td className="px-4 py-3 text-lg">{b.seats || <span className="italic text-gray-400">Not set</span>}</td>
 
                     <td className="px-4 py-3 text-lg">
-                      {b.pickup || <span className="italic text-gray-400">Not set</span>} 
-                      → 
-                      {b.drop || <span className="italic text-gray-400">Not set</span>}
+                      {b.pickup || <span className="italic text-gray-400">Not set</span>} → {b.drop || <span className="italic text-gray-400">Not set</span>}
                     </td>
 
                     <td className="px-4 py-3 text-lg">{b.distance || <span className="italic text-gray-400">Not set</span>}</td>

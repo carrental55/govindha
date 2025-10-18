@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronDown, ChevronUp, CarFront, Phone, User, CheckCircle } from "lucide-react";
+import { ChevronDown, ChevronUp, CheckCircle } from "lucide-react";
 
 const packagesData = [
   {
@@ -10,13 +10,6 @@ const packagesData = [
     code: "1",
     images: ["/images/tirumala.jpg", "/assets/images/tirumala2.jpg"],
     short: "Pickup & drop at your desired location in Tirupati (City limits). Visit temples as part of the package.",
-    cars: [
-      { key: "dzire", label: "Dzire / Amaze / Etios", seats: "4 Seater", price: 3150 },
-      { key: "ertiga", label: "Ertiga", seats: "6 Seater", price: 3750 },
-      { key: "innova", label: "Innova / Xylo / Tavera", seats: "7 Seater", price: 4400 },
-      { key: "crysta", label: "Innova Crysta", seats: "7 Seater", price: 5050 },
-      { key: "tempo", label: "Tempo Traveler", seats: "12 Seater", price: 6250 },
-    ],
     inclusions: "Toll gate, parking charges, driver allowance, and fuel included.",
     exclusions: "Darshan tickets, entrance tickets, accommodation, and driver food (Rs.200 extra during meal time).",
     terms: [
@@ -34,13 +27,6 @@ const packagesData = [
     code: "2",
     images: ["/images/padmavathi.jpg", "/images/padmavathi2.jpg"],
     short: "Visit both Tirumala and Padmavathi temples comfortably with professional drivers and well-maintained vehicles.",
-    cars: [
-      { key: "dzire", label: "Dzire / Amaze / Etios", seats: "4 Seater", price: 3600 },
-      { key: "ertiga", label: "Ertiga", seats: "6 Seater", price: 4250 },
-      { key: "innova", label: "Innova / Xylo / Tavera", seats: "7 Seater", price: 4950 },
-      { key: "crysta", label: "Innova Crysta", seats: "7 Seater", price: 5700 },
-      { key: "tempo", label: "Tempo Traveler", seats: "12 Seater", price: 7150 },
-    ],
     inclusions: "Toll gate, parking charges, driver allowance, and fuel included.",
     exclusions: "Darshan tickets, entrance tickets, accommodation, and driver food (Rs.200 extra during meal time).",
     terms: [
@@ -59,29 +45,17 @@ export default function PackagesPage() {
   const [bookingOpen, setBookingOpen] = useState(null);
   const [formState, setFormState] = useState({});
   const [submitted, setSubmitted] = useState({});
-  const [loading, setLoading] = useState({}); // New: loading state per package
+  const [loading, setLoading] = useState({});
 
   const toggleDetails = (id) => setOpenDetails(openDetails === id ? null : id);
-  const toggleBooking = (id) => {
-    setBookingOpen(bookingOpen === id ? null : id);
-    if (!formState[id]) {
-      const pkg = packagesData.find((p) => p.id === id);
-      setFormState((prev) => ({
-        ...prev,
-        [id]: { name: "", phone: "", pickup: "", drop: "", selectedCar: pkg.cars[0].key },
-      }));
-    }
-  };
+  const toggleBooking = (id) => setBookingOpen(bookingOpen === id ? null : id);
 
   const handleChange = (pkgId, field, value) => {
-    setFormState((s) => ({
-      ...s,
-      [pkgId]: { ...s[pkgId], [field]: value },
-    }));
+    setFormState((s) => ({ ...s, [pkgId]: { ...s[pkgId], [field]: value } }));
   };
 
   const handleSubmit = async (pkgId) => {
-    if (loading[pkgId]) return; // prevent double click
+    if (loading[pkgId]) return;
 
     const form = formState[pkgId];
     if (!form?.name || !form?.phone || !form?.pickup || !form?.drop) {
@@ -92,25 +66,22 @@ export default function PackagesPage() {
     if (!phoneRegex.test(form.phone)) return alert("Please enter a valid 10-digit phone number.");
 
     const pkg = packagesData.find((p) => p.id === pkgId);
-    const car = pkg.cars.find((c) => c.key === form.selectedCar);
 
     try {
-      setLoading((prev) => ({ ...prev, [pkgId]: true })); // start loading
+      setLoading((prev) => ({ ...prev, [pkgId]: true }));
 
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           packageName: pkg.title,
-          carName: car.label,
-          seats: car.seats,
           name: form.name,
           phone: form.phone,
           pickup: form.pickup,
           drop: form.drop,
           distance: "",
           duration: "",
-          price: car.price,
+          price: "",
           date: new Date().toLocaleDateString(),
           time: new Date().toLocaleTimeString(),
         }),
@@ -126,7 +97,7 @@ export default function PackagesPage() {
       console.error(err);
       alert("Booking failed. Please try again.");
     } finally {
-      setLoading((prev) => ({ ...prev, [pkgId]: false })); // stop loading
+      setLoading((prev) => ({ ...prev, [pkgId]: false }));
     }
   };
 
@@ -143,7 +114,6 @@ export default function PackagesPage() {
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
           {packagesData.map((pkg) => {
             const form = formState[pkg.id] || {};
-            const selectedCar = pkg.cars.find((c) => c.key === form.selectedCar) || pkg.cars[0];
 
             return (
               <div key={pkg.id} className="overflow-hidden transition-shadow duration-300 bg-white shadow rounded-2xl hover:shadow-lg">
@@ -166,24 +136,9 @@ export default function PackagesPage() {
 
                   <p className="mt-2 text-sm text-gray-600">{pkg.short}</p>
 
-                  <div className="mt-4 overflow-hidden border rounded-lg">
-                    <div className="grid grid-cols-3 text-xs font-semibold text-center text-white bg-gray-800">
-                      <div className="py-2">Car</div>
-                      <div className="py-2">Seats</div>
-                      <div className="py-2">Price</div>
-                    </div>
-                    {pkg.cars.map((c, i) => (
-                      <div key={c.key} className={`grid grid-cols-3 text-xs text-center border-t ${i % 2 ? "bg-gray-50" : "bg-white"}`}>
-                        <div className="py-2">{c.label}</div>
-                        <div className="py-2">{c.seats}</div>
-                        <div className="py-2 font-semibold text-green-600">₹{c.price}</div>
-                      </div>
-                    ))}
-                  </div>
-
                   <div className="flex flex-wrap justify-between gap-3 mt-5">
                     <button onClick={() => toggleDetails(pkg.id)} className="flex items-center px-4 py-2 text-sm border rounded-lg hover:bg-gray-100">
-                      {openDetails === pkg.id ? <><ChevronUp size={16} className="mr-1" /> Hide Details</> : <><ChevronDown size={16} className="mr-1" /> View Details</>}
+                      {openDetails === pkg.id ? "Hide Details" : "View Details"}
                     </button>
 
                     <button onClick={() => toggleBooking(pkg.id)} className="px-4 py-2 text-sm text-white transition-all bg-orange-600 rounded-lg hover:bg-orange-700">
@@ -209,72 +164,37 @@ export default function PackagesPage() {
                           <CheckCircle size={20} /> Booking successful! We’ll contact you soon.
                         </div>
                       ) : (
-                        <>
-                          <div className="grid gap-3 md:grid-cols-2">
-                            <div>
-                              <label className="block text-xs font-medium text-gray-700">Name</label>
-                              <div className="relative mt-1">
-                                <User size={14} className="absolute text-gray-400 left-2 top-2.5" />
-                                <input type="text" value={form.name || ""} onChange={(e) => handleChange(pkg.id, "name", e.target.value)} placeholder="Your name" className="w-full py-2 pr-2 text-sm border rounded-lg pl-7 focus:ring-2 focus:ring-orange-400" />
-                              </div>
-                            </div>
-
-                            <div>
-                              <label className="block text-xs font-medium text-gray-700">Phone</label>
-                              <div className="relative mt-1">
-                                <Phone size={14} className="absolute text-gray-400 left-2 top-2.5" />
-                                <input type="tel" value={form.phone || ""} onChange={(e) => handleChange(pkg.id, "phone", e.target.value)} placeholder="10-digit phone number" className="w-full py-2 pr-2 text-sm border rounded-lg pl-7 focus:ring-2 focus:ring-orange-400" maxLength={10} />
-                              </div>
-                            </div>
-
-                            <div>
-                              <label className="block text-xs font-medium text-gray-700">Pickup Location</label>
-                              <input type="text" value={form.pickup || ""} onChange={(e) => handleChange(pkg.id, "pickup", e.target.value)} placeholder="Enter pickup location" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" />
-                            </div>
-
-                            <div>
-                              <label className="block text-xs font-medium text-gray-700">Drop Location</label>
-                              <input type="text" value={form.drop || ""} onChange={(e) => handleChange(pkg.id, "drop", e.target.value)} placeholder="Enter drop location" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" />
-                            </div>
+                        <div className="grid gap-3 md:grid-cols-2">
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700">Name</label>
+                            <input type="text" value={form.name || ""} onChange={(e) => handleChange(pkg.id, "name", e.target.value)} placeholder="Your name" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" />
                           </div>
 
-                          <div className="mt-4">
-                            <div className="mb-1 text-xs font-semibold text-gray-700">Choose Vehicle</div>
-                            <div className="space-y-2">
-                              {pkg.cars.map((c) => (
-                                <label key={c.key} className={`flex items-center justify-between p-2 border rounded-lg cursor-pointer ${form.selectedCar === c.key ? "bg-orange-50 border-orange-400" : "hover:bg-gray-50"}`}>
-                                  <div className="flex items-center gap-2">
-                                    <CarFront size={16} className="text-orange-500" />
-                                    <div>
-                                      <div className="text-sm font-medium">{c.label}</div>
-                                      <div className="text-xs text-gray-500">{c.seats}</div>
-                                    </div>
-                                  </div>
-                                  <div className="text-sm font-semibold text-green-600">₹{c.price}</div>
-                                  <input type="radio" name={`car-${pkg.id}`} checked={form.selectedCar === c.key} onChange={() => handleChange(pkg.id, "selectedCar", c.key)} />
-                                </label>
-                              ))}
-                            </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700">Phone</label>
+                            <input type="tel" value={form.phone || ""} onChange={(e) => handleChange(pkg.id, "phone", e.target.value)} placeholder="10-digit phone number" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" maxLength={10} />
                           </div>
 
-                          <div className="flex items-center justify-between mt-5">
-                            <div className="text-lg font-bold text-gray-800">Total: ₹{selectedCar.price}</div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700">Pickup Location</label>
+                            <input type="text" value={form.pickup || ""} onChange={(e) => handleChange(pkg.id, "pickup", e.target.value)} placeholder="Enter pickup location" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-medium text-gray-700">Drop Location</label>
+                            <input type="text" value={form.drop || ""} onChange={(e) => handleChange(pkg.id, "drop", e.target.value)} placeholder="Enter drop location" className="w-full py-2 text-sm border rounded-lg focus:ring-2 focus:ring-orange-400" />
+                          </div>
+
+                          <div className="flex justify-end col-span-2 mt-5">
                             <button
                               onClick={() => handleSubmit(pkg.id)}
                               disabled={loading[pkg.id]}
                               className={`px-5 py-2 text-white rounded-lg ${loading[pkg.id] ? "bg-gray-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"}`}
                             >
-                              {loading[pkg.id] ? (
-                                <svg className="w-5 h-5 mx-auto text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                                </svg>
-                              ) : (
-                                "Confirm Booking"
-                              )}
+                              {loading[pkg.id] ? "Loading..." : "Confirm Booking"}
                             </button>
                           </div>
-                        </>
+                        </div>
                       )}
                     </div>
                   )}

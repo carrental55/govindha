@@ -1,18 +1,18 @@
 import mongoose from 'mongoose';
 
 const BookingSchema = new mongoose.Schema({
-  packageName: { type: String, default: "" }, // Added packageName
-  carName: String,
-  seats: { type: String, default: "" },       // Added seats
-  name: String,
-  phone: String,
-  pickup: String,
-  drop: String,
-  distance: String,
-  duration: String,
-  price: String,
-  date: String,
-  time: String,
+  packageName: { type: String, default: "" },
+  carName: { type: String, default: "" },
+  seats: { type: String, default: "" },
+  name: { type: String, required: true },
+  phone: { type: String, required: true },
+  pickup: { type: String, required: true },
+  drop: { type: String, required: true },
+  distance: { type: String, default: "" },
+  duration: { type: String, default: "" },
+  price: { type: Number, default: ""},
+  date: { type: String, default: "" },
+  time: { type: String, default: "" },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   const { MONGODB_URI } = process.env;
 
   try {
-    if (!mongoose.connections[0].readyState) {
+    if (mongoose.connection.readyState === 0) {
       await mongoose.connect(MONGODB_URI);
     }
 
@@ -41,8 +41,8 @@ export default async function handler(req, res) {
       phone: b.phone,
       pickup: b.pickup,
       drop: b.drop,
-      distance: b.distance,
-      duration: b.duration,
+      distance: b.distance || "",
+      duration: b.duration || "",
       price: b.price,
       date: b.date,
       time: b.time,
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ success: true, bookings: updatedBookings });
   } catch (error) {
-    console.error(error);
+    console.error('❌ Error fetching bookings:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 }
