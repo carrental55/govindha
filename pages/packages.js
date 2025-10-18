@@ -205,9 +205,7 @@ export default function PackagesPage() {
         </div>
       </main>
 
-      <footer className="py-8 mt-12 text-sm text-center text-gray-500 border-t">
-        © {new Date().getFullYear()} Tirumala Packages. All Rights Reserved.
-      </footer>
+     
     </div>
   );
 }
