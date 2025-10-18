@@ -207,9 +207,7 @@ const FeaturedCars = () => {
               <div className="mt-4">
                 <p className="text-lg font-bold text-blue-500"> ₹{car.price}<span className="text-sm font-normal text-gray-500">/km</span></p>
               </div>
-              <div className="mt-4">
-                <p className="text-lg font-bold text-blue-500"> ₹{car.Day}<span className="text-sm font-normal text-gray-500">/PER DAY</span></p>
-              </div>
+            
               
             </div>
           </div>

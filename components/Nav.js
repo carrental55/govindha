@@ -31,7 +31,7 @@ const Nav = () => {
             Packages
           </Link>
           <Link href="/dayscars" className="font-medium text-gray-700 hover:text-blue-700">
-            Days Cars
+            DayRentCars
           </Link>
 
           {isAdmin && (
