@@ -25,29 +25,29 @@ const Footer = () => {
         {/* Logo and Description */}
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center space-x-2">
-            <Car className="w-8 h-8 text-blue-500" />
-            <span className="text-xl font-bold">carrentals</span>
+           
+            <span className="text-xl font-bold ">Tirupati Shankar Travels</span>
           </Link>
           <p className="max-w-md leading-relaxed">
-            Your trusted partner for premium car rentals. Experience the freedom of the road with our quality vehicles and exceptional service.
+            Your trusted partner for car Travels & rentals. Experience the freedom of the road with our quality vehicles and exceptional service.
           </p>
         </div>
 
         {/* Contact Information */}
         <div className="flex flex-col gap-2 text-gray-300">
           <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white">
-            <Phone className="w-5 h-5 text-blue-400" /> +91 98765 43210
+            <Phone className="w-5 h-5 text-blue-400" /> +91 9177563070
           </a>
-          <a href="mailto:info@carrental.com" className="flex items-center gap-2 hover:text-white">
-            <Mail className="w-5 h-5 text-blue-400" /> info@carrental.com
+          <a href="mailto:pandarammunikumar97@gmail.com" className="flex items-center gap-2 hover:text-white">
+            <Mail className="w-5 h-5 text-blue-400" /> pandarammunikumar97@gmail.com
           </a>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=123+MG+Road+Bengaluru+India"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-white"
           >
-            <MapPin className="w-5 h-5 text-blue-400" /> 123, MG Road, Bengaluru, India
+            <MapPin className="w-5 h-5 text-blue-400" /> 4-37, Gundralamitta, Madhavamala, Chittor, AndhraPradesh.
           </a>
         </div>
 
@@ -79,7 +79,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="pt-6 mt-10 text-sm text-gray-500 border-t border-gray-700">
-        &copy; {new Date().getFullYear()} carrentals. All rights reserved.
+        &copy; {new Date().getFullYear()} tirupatishankartravels.in All rights reserved.
       </div>
     </footer>
   );

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://carrentas.com
+Host: https://tirupatishankartravels.in
 
 # Sitemaps
-Sitemap: https://carrentas.com/sitemap.xml
+Sitemap: https://tirupatishankartravels.in/sitemap.xml

@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Default SEO for all pages */}
-        <meta name="description" content="Book your rental car with Carrentas. Affordable, flexible pickup and drop, instant booking." />
+        <meta name="description" content="Book your rental car with tirupatishankartravels. Affordable, flexible pickup and drop, instant booking." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Carrentas" />
         <meta name="twitter:card" content="summary_large_image" />

@@ -9,15 +9,15 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Car Rentals Near You — Carrentas</title>
+        <title>Tirupathi Shankar Travels</title>
         <meta name="description" content="Book your rental car with Carrentas. Affordable, flexible pickup and drop, instant booking." />
-        <link rel="canonical" href="https://carrentas.com" />
+        <link rel="canonical" href="https://tirupatishankartravels.in" />
         
         {/* Open Graph */}
-        <meta property="og:url" content="https://carrentas.com" />
-        <meta property="og:title" content="Car Rentals Near You — Carrentas" />
+        <meta property="og:url" content="https://tirupatishankartravels.in" />
+        <meta property="og:title" content="Car Rentals in Tirupati — Carrentas" />
         <meta property="og:description" content="Book your rental car with Carrentas. Affordable, flexible pickup and drop, instant booking." />
-        <meta property="og:image" content="https://carrentas.com/og-image.jpg" />
+        <meta property="og:image" content="https://tirupatishankartravels.in" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Carrentas" />
@@ -25,7 +25,7 @@ export default function Home() {
         {/* Twitter */}
         <meta name="twitter:title" content="Car Rentals Near You — Carrentas" />
         <meta name="twitter:description" content="Book your rental car with Carrentas. Affordable, flexible pickup and drop, instant booking." />
-        <meta name="twitter:image" content="https://carrentas.com/og-image.jpg" />
+        <meta name="twitter:image" content="https://tirupatishankartravels.in" />
       </Head>
 
       <main style={{ padding: "2rem" }}>
