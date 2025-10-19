@@ -1,5 +1,4 @@
-'use client';
-
+"use client";
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Car, MapPin, Users, Cog, Fuel, Star, X } from 'lucide-react';
@@ -7,7 +6,7 @@ import { Car, MapPin, Users, Cog, Fuel, Star, X } from 'lucide-react';
 const cars = [
   {
     id: 1,
-    name: 'SWIFT DZIRE - DXI BLUE COLOUR',
+    name: 'SWIFT DZIRE - VXI BLUE COLOUR',
     location: 'Tirupati',
     seats: '4+1',
     fuel: 'Petrol',
@@ -112,7 +111,7 @@ const cars = [
     badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
     
     status: 'Available',
-    image: '/assets/swiftdzirered.jpg',
+    image: '/assets/swiftdzirewhite.jpg',
   },
   {
     id: 8,
@@ -322,6 +321,8 @@ const CarsListPage = () => {
                 <p className="text-2xl font-bold text-blue-600">
                   ₹{car.price}
                   <span className="text-sm font-normal text-gray-500">/km</span>
+                  <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-gray-500"> Minimum 300-km Trip </span> </p>
+                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Tollgate,Parking and Other State Permit are Party Expences </span> </p>
                 </p>
                
                 <button

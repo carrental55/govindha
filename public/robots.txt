@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://carrentas.com
+
+# Sitemaps
+Sitemap: https://carrentas.com/sitemap.xml

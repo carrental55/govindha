@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import { Car, MapPin, Users, Fuel, Star } from 'lucide-react';
 const cars = [
   {
     id: 1,
-    name: 'SWIFT DZIRE - DXI BLUE COLOUR',
+    name: 'SWIFT DZIRE - VXI BLUE COLOUR',
     location: 'Tirupati',
     seats: '4+1',
     fuel: 'Petrol',
@@ -79,7 +79,7 @@ const cars = [
   },
   {
     id: 7,
-    name: 'NEW DZIRE DXI -WHITE COLOUR',
+    name: 'NEW DZIRE VXI -WHITE COLOUR',
     location: 'Tirupati',
     seats: '4+1',
     fuel: 'Petrol',
@@ -90,7 +90,7 @@ const cars = [
     image: '/assets/swiftdzirewhite.jpg',
   },
   {
-    id: 7,
+    id: 8,
     name: 'DZIRE VXI -WHITE COLOUR',
     location: 'Tirupati',
     seats: '4+1',
@@ -273,6 +273,7 @@ const FeaturedCars = () => {
                 <p className="text-lg font-bold text-blue-500">
                   ₹{car.Day}
                   <span className="text-sm font-normal text-gray-500"> /PER DAY</span>
+              
                 </p>
                 <button
                   onClick={() => handleBookNow(car)}
@@ -281,6 +282,8 @@ const FeaturedCars = () => {
                   Book Now
                 </button>
               </div>
+              <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-gray-500 underline"> Extra  ₹ 11/Per KM </span> </p>
+                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Tollgate,Parking and Other State Permit are Party Expences </span> </p>
             </div>
           </div>
         ))}
