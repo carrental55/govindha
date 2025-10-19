@@ -172,12 +172,12 @@ export default function PackagesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <header className="py-10 text-center text-white shadow-md bg-gradient-to-r from-orange-600 to-red-500">
-        <h1 className="text-3xl font-bold md:text-4xl">Tirumala Tirupati Tour Packages</h1>
+        <h1 className="text-3xl font-bold md:text-4xl">Our Tour Packages</h1>
         <p className="mt-2 text-sm text-gray-100">Comfortable • Affordable • Trusted Service</p>
       </header>
 
       <main className="px-4 py-10 mx-auto max-w-7xl">
-        <h2 className="mb-10 text-2xl font-semibold text-center text-gray-800">Choose Your Tirupati–Tirumala Package</h2>
+        <h2 className="mb-10 text-2xl font-semibold text-center text-gray-800">Choose Your Affordable Package</h2>
 
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
           {packagesData.map((pkg) => {
