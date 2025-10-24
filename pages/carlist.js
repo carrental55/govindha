@@ -13,7 +13,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: 4.8,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver',,'TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/dzireblue.jpg', // path relative to public folder
   },
@@ -28,7 +28,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: '4.7',
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver',,'TOLL AND PARKING EXCLUDED'],
  
     status: 'Available',
     image: '/assets/etiossilver.jpg',
@@ -44,7 +44,7 @@ const cars = [
     price: 25,
     Day:3500,
     rating: '4.6',
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
     
     status: 'Available',
     image: '/assets/innovared.jpg',
@@ -60,7 +60,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: '4.6',
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
   
     status: 'Available',
     image: '/assets/swiftdzirered.jpg',
@@ -76,7 +76,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: '4.6',
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
   
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
@@ -92,7 +92,7 @@ const cars = [
     price: 20,
     Day:3000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
    
     status: 'Available',
     image: '/assets/xl6.jpg',
@@ -108,7 +108,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
     
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
@@ -124,7 +124,7 @@ const cars = [
     price: 15,
     Day:2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','TOLL AND PARKING EXCLUDED'],
     
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
@@ -354,7 +354,7 @@ const CarsListPage = () => {
                   ₹{car.price}
                   <span className="text-sm font-normal text-gray-500">/km</span>
                   <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-gray-500"> Minimum 300-km Trip </span> </p>
-                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Tollgate,Parking and Other State Permit are Party Expences </span> </p>
+                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Other State Permit are Party Expences </span> </p>
                 </p>
                
                 <button

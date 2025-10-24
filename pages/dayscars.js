@@ -13,7 +13,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 2000,
     rating: 4.8,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/dzireblue.jpg',
   },
@@ -25,7 +25,7 @@ const cars = [
     fuel: 'Diesel',
     Day: 2000,
     rating: 4.7,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/etiossilver.jpg',
   },
@@ -37,7 +37,7 @@ const cars = [
     fuel: 'Diesel',
     Day: 3500,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/innovared.jpg',
   },
@@ -49,7 +49,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/swiftdzirered.jpg',
   },
@@ -61,7 +61,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
   },
@@ -73,7 +73,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 3000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/xl6.jpg',
   },
@@ -85,7 +85,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
   },
@@ -97,7 +97,7 @@ const cars = [
     fuel: 'Petrol',
     Day: 2000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 11/Per KM','TOLL AND PARKING EXCLUDED'],
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
   },
@@ -112,7 +112,7 @@ const cars = [
     price: 15,
     Day:4000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 15/Per KM'],
     
     status: 'Available',
     image: '/assets/tt.jpg',
@@ -126,9 +126,9 @@ const cars = [
     
     fuel: 'Diesel',
     price: 15,
-    Day:2000,
+    Day:6000,
     rating: 4.6,
-    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver','Extra ₹ 15/Per KM'],
     
     status: 'Available',
     image: '/assets/forceurbania.jpg',
@@ -314,8 +314,8 @@ const FeaturedCars = () => {
                   Book Now
                 </button>
               </div>
-              <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-gray-500 underline"> Extra  ₹ 11/Per KM </span> </p>
-                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Tollgate,Parking and Other State Permit are Party Expences </span> </p>
+              <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-gray-500 underline"> </span> </p>
+                <p className="text-lg font-bold text-blue-500"> <span className="text-sm font-semibold text-green-500"> Other State Permit are Party Expences </span> </p>
             </div>
           </div>
         ))}
