@@ -38,7 +38,7 @@ const cars = [
     name: 'INNOVA CRYSTA Z - GRANITE RED',
    
     location: 'Tirupati',
-    seats: '6+1',
+    seats: '6+1 & 7+1',
    
     fuel: 'Diesel',
     price: 25,
@@ -86,7 +86,7 @@ const cars = [
     name: 'MARUTI SUZUKI XL6',
    
     location: 'Tirupati',
-    seats: '5+1',
+    seats: '5+1 & 6+1',
    
     fuel: 'Petrol',
     price: 20,
