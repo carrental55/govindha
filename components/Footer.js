@@ -36,7 +36,14 @@ const Footer = () => {
         {/* Contact Information */}
         <div className="flex flex-col gap-2 text-gray-300">
           <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-white">
+            
+
             <Phone className="w-5 h-5 text-blue-400" /> +91 9177563070
+          </a>
+          <a href="tel:+919154695193" className="flex items-center gap-2 hover:text-white">
+            
+
+            <Phone className="w-5 h-5 text-blue-400" /> +91 9154695193
           </a>
           <a href="mailto:pandarammunikumar97@gmail.com" className="flex items-center gap-2 hover:text-white">
             <Mail className="w-5 h-5 text-blue-400" /> pandarammunikumar97@gmail.com

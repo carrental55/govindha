@@ -130,6 +130,38 @@ const cars = [
     status: 'Available',
     image: '/assets/swiftdzirewhite.jpg',
   },
+  {
+    id: 9,
+    name: 'FORCE TRAVELLER',
+    
+    location: 'Tirupati',
+    seats: '12+1 - 18+1 - 22+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:4000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/tt.jpg',
+  },
+  {
+    id: 10,
+    name: 'FORCE URBANIA',
+    
+    location: 'Tirupati',
+    seats: '16+1 - 12+1',
+    
+    fuel: 'Diesel',
+    price: 15,
+    Day:2000,
+    rating: 4.6,
+    badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
+    
+    status: 'Available',
+    image: '/assets/forceurbania.jpg',
+  },
   
   
   // add remaining cars similarly
