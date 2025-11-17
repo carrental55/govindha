@@ -4,6 +4,8 @@ import Hero from "../components/Hero";
 import FeaturedCars from "@/components/FeaturedCars";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";
+import Tables from "@/components/Tables";
+import Reviews from "@/components/Reviews";
 
 export default function Home() {
   return (
@@ -30,6 +32,8 @@ export default function Home() {
 
       <main style={{ padding: "2rem" }}>
         <Hero />
+        <Tables/>
+        <Reviews/>
         <FeaturedCars />
         <Features />
         <Footer />

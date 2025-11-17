@@ -137,7 +137,7 @@ const cars = [
     seats: '12+1 - 18+1 - 22+1',
     
     fuel: 'Diesel',
-    price: 15,
+    price: 35,
     Day:4000,
     rating: 4.6,
     badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
@@ -153,7 +153,7 @@ const cars = [
     seats: '16+1 - 12+1',
     
     fuel: 'Diesel',
-    price: 15,
+    price: 40,
     Day:2000,
     rating: 4.6,
     badges: ['Secure Journey', 'Comfortable', 'Experience Driver'],
