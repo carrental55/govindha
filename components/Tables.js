@@ -20,6 +20,14 @@ export default function PriceTables() {
     { name: 'Day Rental', hours: 'Full Day', sedan: 2500, crysta: 4000, xl6: 3500 },
   ];
 
+  // Helper to open WhatsApp with a prefilled message to the fixed number
+  const openWhatsApp = (text) => {
+    const phone = '919177563070'; // +91 9177563070
+    const encoded = encodeURIComponent(text);
+    const url = `https://wa.me/${phone}?text=${encoded}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="max-w-6xl p-4 mx-auto md:p-6">
       {/* HEADER */}
@@ -28,11 +36,11 @@ export default function PriceTables() {
           Tirupati Shankar Travels
         </h2>
         <p className="max-w-2xl mx-auto mt-3 text-sm leading-relaxed text-gray-600 md:text-base">
-        Tirupati Shankar Travels is your trusted travel partner for safe, affordable, and comfortable trips across all major spiritual destinations in and around Tirupati. Whether you're heading to Tirumala, Sri Kalahasti, Kanipakam, Golden Temple,Arunachalam Etc or exploring the divine local temples, we ensure a smooth and hassle-free travel experience for every devotee.
+          Tirupati Shankar Travels is your trusted travel partner for safe, affordable, and comfortable trips across all major spiritual destinations in and around Tirupati. Whether you're heading to Tirumala, Sri Kalahasti, Kanipakam, Golden Temple,Arunachalam Etc or exploring the divine local temples, we ensure a smooth and hassle-free travel experience for every devotee.
 
-We offer well-maintained Sedans, Crystas, and XL6 vehicles, driven by experienced and polite chauffeurs who understand the routes, temple timings, and local guidelines. From airport pickups to full-day temple packages, our services are designed to provide convenience, punctuality, and peace of mind.
+          We offer well-maintained Sedans, Crystas, and XL6 vehicles, driven by experienced and polite chauffeurs who understand the routes, temple timings, and local guidelines. From airport pickups to full-day temple packages, our services are designed to provide convenience, punctuality, and peace of mind.
 
-Choose from our Drop Services or Special Darshan Packages and enjoy seamless travel with transparent pricing, comfort, and complete devotion-focused planning. With Tirupati Shankar Travels, your spiritual journey begins the moment you start your ride.
+          Choose from our Drop Services or Special Darshan Packages and enjoy seamless travel with transparent pricing, comfort, and complete devotion-focused planning. With Tirupati Shankar Travels, your spiritual journey begins the moment you start your ride.
         </p>
       </header>
 
@@ -79,8 +87,8 @@ Choose from our Drop Services or Special Darshan Packages and enjoy seamless tra
           </div>
         </div>
 
-        {/* DESKTOP TABLE */}
-        <div className="hidden overflow-x-auto bg-white border border-gray-200 shadow-lg md:block rounded-xl">
+        {/* TABLE VISIBLE ON ALL SIZES (kept overflow-x-auto for small screens) */}
+        <div className="overflow-x-auto bg-white border border-gray-200 shadow-lg rounded-xl">
           <table className="min-w-full divide-y divide-gray-300">
             <thead>
               <tr className="bg-gradient-to-r from-blue-50 to-indigo-50">
@@ -103,46 +111,33 @@ Choose from our Drop Services or Special Darshan Packages and enjoy seamless tra
           </table>
         </div>
 
-        {/* MOBILE CARDS */}
-        <div className="grid gap-4 md:hidden">
-          {onlyDrop.map((row, idx) => (
-            <article
-              key={idx}
-              className="flex flex-col gap-3 p-4 transition transform bg-white border border-gray-200 shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-base font-semibold text-gray-900">{row.route}</h4>
-                  <p className="mt-1 text-xs text-gray-500">One-way drop</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-green-600">Sedan</div>
-                    <div className="text-xs text-gray-500">₹{row.sedan}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-purple-600">Crysta</div>
-                    <div className="text-xs text-gray-500">₹{row.crysta}</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-sm font-bold text-orange-600">XL6</div>
-                    <div className="text-xs text-gray-500">₹{row.xl6}</div>
-                  </div>
-                </div>
-              </div>
+        <footer className="mt-8 text-sm text-center text-gray-600">
+          <div className="flex flex-col items-center gap-3">
+            <p>
+              Prices are indicative. Contact <strong className="text-blue-700">Tirupati Shankar Travels</strong> for latest
+              details or immediate booking.
+            </p>
 
-              <div className="flex items-center justify-between pt-2">
-                <div className="text-xs text-gray-500">Comfort & clean cars • Verified drivers</div>
-                <button
-                  className="px-3 py-1 text-xs text-white bg-blue-600 rounded-full shadow hover:opacity-95"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Enquire
-                </button>
+            <a
+              href="https://wa.me/919177563070?text=Hello%2C%20I%20need%20assistance%20regarding%20your%20travel%20packages."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-4 py-2 rounded-full shadow-lg transform hover:-translate-y-0.5 transition"
+              aria-label="Chat on WhatsApp"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path fill="#fff" d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.373 0 .001 5.373 0 12c0 2.115.551 4.186 1.6 6.002L0 24l6.238-1.607A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.203-1.247-6.214-3.48-8.52z"/>
+                <path fill="#25D366" d="M20.52 3.48A11.92 11.92 0 0 0 12 0v24c2.115 0 4.186-.551 6.002-1.6L24 24l-1.6-1.6A11.92 11.92 0 0 0 24 12c0-3.203-1.247-6.214-3.48-8.52z" opacity="0.0"/>
+                <path fill="#fff" d="M17.3 14.9c-.3-.15-1.77-.86-2.05-.96-.28-.1-.48-.15-.68.15-.2.3-.78.96-.96 1.16-.18.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.77-1.46-1.72-1.63-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2 0-.38-.02-.53-.02-.15-.68-1.64-.93-2.25-.25-.59-.5-.51-.68-.52l-.58-.01c-.2 0-.52.07-.8.35-.28.28-1.06 1.04-1.06 2.54s1.09 2.94 1.24 3.14c.15.2 2.15 3.3 5.22 4.63 3.07 1.33 3.07.89 3.62.83.55-.06 1.77-.72 2.02-1.41.25-.69.25-1.28.18-1.41-.08-.12-.28-.18-.58-.33z"/>
+              </svg>
+
+              <div className="text-left">
+                <div className="text-sm font-medium">Need help? Chat on WhatsApp</div>
+                <div className="text-xs opacity-90">Agent: +91 9177563070</div>
               </div>
-            </article>
-          ))}
-        </div>
+            </a>
+          </div>
+        </footer>
       </section>
 
       {/* PACKAGES */}
@@ -164,8 +159,8 @@ Choose from our Drop Services or Special Darshan Packages and enjoy seamless tra
           </div>
         </div>
 
-        {/* DESKTOP TABLE */}
-        <div className="hidden overflow-x-auto bg-white border border-gray-200 shadow-lg md:block rounded-xl">
+        {/* TABLE VISIBLE ON ALL SIZES */}
+        <div className="overflow-x-auto bg-white border border-gray-200 shadow-lg rounded-xl">
           <table className="min-w-full divide-y divide-gray-300">
             <thead>
               <tr className="bg-gradient-to-r from-green-50 to-emerald-50">
@@ -189,38 +184,6 @@ Choose from our Drop Services or Special Darshan Packages and enjoy seamless tra
             </tbody>
           </table>
         </div>
-
-        {/* MOBILE CARDS */}
-        <div className="grid gap-4 md:hidden">
-          {packages.map((row, idx) => (
-            <article
-              key={idx}
-              className="flex flex-col gap-3 p-4 transition transform bg-white border border-gray-200 shadow-md rounded-2xl hover:shadow-xl hover:-translate-y-1"
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <h4 className="text-base font-semibold text-gray-900">{row.name}</h4>
-                  <p className="mt-1 text-xs text-gray-500">{row.hours}</p>
-                </div>
-                <div className="space-y-1 text-sm text-right">
-                  <div className="font-bold text-center text-blue-700">Sedan<br /><span className="text-xs font-normal text-gray-500">₹{row.sedan}</span></div>
-                  <div className="font-bold text-center text-purple-700">Crysta<br /><span className="text-xs font-normal text-gray-500">₹{row.crysta}</span></div>
-                  <div className="font-bold text-center text-orange-700">XL6<br /><span className="text-xs font-normal text-gray-500">₹{row.xl6}</span></div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between pt-2">
-                <div className="text-xs text-gray-500">Includes driver & tolls (where applicable)</div>
-                <button
-                  className="px-3 py-1 text-xs text-white bg-green-600 rounded-full shadow hover:opacity-95"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Enquire
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
       </section>
 
       {/* FOOTER with highlighted WhatsApp help */}
@@ -238,7 +201,6 @@ Choose from our Drop Services or Special Darshan Packages and enjoy seamless tra
             className="inline-flex items-center gap-3 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-4 py-2 rounded-full shadow-lg transform hover:-translate-y-0.5 transition"
             aria-label="Chat on WhatsApp"
           >
-            {/* simple inline WhatsApp svg for crispness */}
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path fill="#fff" d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.373 0 .001 5.373 0 12c0 2.115.551 4.186 1.6 6.002L0 24l6.238-1.607A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.203-1.247-6.214-3.48-8.52z"/>
               <path fill="#25D366" d="M20.52 3.48A11.92 11.92 0 0 0 12 0v24c2.115 0 4.186-.551 6.002-1.6L24 24l-1.6-1.6A11.92 11.92 0 0 0 24 12c0-3.203-1.247-6.214-3.48-8.52z" opacity="0.0"/>
