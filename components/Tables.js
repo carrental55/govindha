@@ -3,20 +3,21 @@ import { Truck, Clock, Star, CreditCard, PhoneCall, Car, MapPin } from 'lucide-r
 
 export default function PriceTables() {
   const onlyDrop = [
-    { route: 'Tirupati Airport to Tirumala', sedan: 800, crysta: 1500, xl6: 2400 },
-    { route: 'Tirupati Airport to Tirupati', sedan: 500, crysta: 1500, xl6: 2300 },
-    { route: 'Tirupati Airport to Sri Kalahasti', sedan: 1500, crysta: 2800, xl6: 3200 },
-    { route: 'Tirupati to Tirupati', sedan: 300, crysta: 600, xl6: 900 },
-    { route: 'Tirupati to Sri Kalahasti', sedan: 800, crysta: 1400, xl6: 2000 },
+    { route: 'Tirupati Airport to Tirumala', sedan: 1500, crysta: 2800, xl6: 2400 },
+    { route: 'Tirupati Airport to Tirupati', sedan: 800, crysta: 1500, xl6: 1400 },
+    { route: 'Tirupati Airport to Sri Kalahasti', sedan: 1500, crysta: 2300, xl6: 2000 },
+    { route: 'Tirupati to Tirumala', sedan: 1100, crysta: 1800, xl6: 1600 },
+    { route: 'Tirupati to Sri Kalahasti', sedan: 1800, crysta: 3200, xl6: 2800 },
   ];
 
   const packages = [
     { name: 'Tirumala', hours: '5 hrs', sedan: 2500, crysta: 4000, xl6: 3500 },
-    { name: 'Sri Kalahasti', hours: '5 hrs', sedan: 3000, crysta: 5000, xl6: 4000 },
-    { name: 'Kanipakam', hours: '6 hrs', sedan: 4000, crysta: 6000, xl6: 5200 },
-    { name: 'Golden Temple', hours: '5 hrs', sedan: 2500, crysta: 14000, xl6: 3500 },
+    { name: 'Sri Kalahasti', hours: '5 hrs', sedan: 3000, crysta: 5000, xl6: 4500 },
+    { name: 'Kanipakam', hours: '6 hrs', sedan: 4000, crysta: 6000, xl6: 5500 },
+    { name: 'Golden Temple', hours: '5 hrs', sedan: 5000, crysta: 7000, xl6: 6500 },
+    { name: 'Arunachalam', hours: '8 hrs', sedan: 9000, crysta: 14000, xl6: 13000 },
     { name: 'Local Temples Places (5 Temples)', hours: '5 hrs', sedan: 2500, crysta: 3500, xl6: 3000 },
-    { name: 'Day Package', hours: 'Full Day', sedan: 2500, crysta: 7000, xl6: 4000 },
+    { name: 'Day Rental', hours: 'Full Day', sedan: 2500, crysta: 4000, xl6: 3500 },
   ];
 
   return (
@@ -27,9 +28,11 @@ export default function PriceTables() {
           Tirupati Shankar Travels
         </h2>
         <p className="max-w-2xl mx-auto mt-3 text-sm leading-relaxed text-gray-600 md:text-base">
-          Your trusted travel partner for airport drops, temple visits, and city rides. Choose from our modern
-          fleet—Sedan, Crysta, and XL6—with transparent pricing and premium comfort. Tap any card to view details or
-          contact us for booking.
+        Tirupati Shankar Travels is your trusted travel partner for safe, affordable, and comfortable trips across all major spiritual destinations in and around Tirupati. Whether you're heading to Tirumala, Sri Kalahasti, Kanipakam, Golden Temple,Arunachalam Etc or exploring the divine local temples, we ensure a smooth and hassle-free travel experience for every devotee.
+
+We offer well-maintained Sedans, Crystas, and XL6 vehicles, driven by experienced and polite chauffeurs who understand the routes, temple timings, and local guidelines. From airport pickups to full-day temple packages, our services are designed to provide convenience, punctuality, and peace of mind.
+
+Choose from our Drop Services or Special Darshan Packages and enjoy seamless travel with transparent pricing, comfort, and complete devotion-focused planning. With Tirupati Shankar Travels, your spiritual journey begins the moment you start your ride.
         </p>
       </header>
 

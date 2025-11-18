@@ -33,9 +33,9 @@ export default function Home() {
       <main style={{ padding: "2rem" }}>
         <Hero />
         <Tables/>
-        <Reviews/>
         <FeaturedCars />
         <Features />
+        <Reviews/>
         <Footer />
       </main>
     </>

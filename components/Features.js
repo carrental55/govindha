@@ -75,7 +75,7 @@ const Features = () => {
     <section className="py-16 bg-gray-100 px-4 sm:px-6 lg:px-28">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="sm:text-4xl text-3xl font-bold text-gray-800 mb-4 hero-reveal">
-          Why Choose AutoRent?
+          Why Choose Tirupati Shankar Travels?
         </h2>
         <p className="text-gray-600 mb-12 max-w-2xl mx-auto text-lg hero-reveal">
           We're committed to providing you with the best car rental experience through our premium services and customer-first approach.
